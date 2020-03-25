@@ -1,0 +1,12 @@
+Go中的Signal发送和处理
+
+golang中对信号的处理主要使用os/signal包中的两个方法：
+notify方法用来监听收到的信号
+stop方法用来取消监听
+
+
+
+
+
+
+

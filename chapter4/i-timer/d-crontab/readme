@@ -1,0 +1,33 @@
+golang 写循环执行的定时任务，常见的有以下三种实现方式: https://www.cnblogs.com/Miracle-boy/p/10797304.html
+
+
+1、time.Sleep方法：
+
+for {
+   time.Sleep(time.Second)
+   fmt.Println("我在定时执行任务")
+}
+
+
+2、time.Tick函数：
+
+t1:=time.Tick(3*time.Second)
+for {
+   select {
+   case <-t1:
+       fmt.Println("t1定时器")
+   }
+}
+
+
+3、其中Tick定时任务，也可以先使用time.Ticker函数获取Ticker结构体，然后进行阻塞监听信息，这种方式可以手动选择停止定时任务，在停止任务时，减少对内存的浪费。
+
+t:=time.NewTicker(time.Second)
+for {
+    select {
+    case <-t.C:
+          fmt.Println("t1定时器")
+    t.Stop()
+}
+}
+
