@@ -1,0 +1,28 @@
+@link http://ifeve.com/go-concurrency-object-pool/
+@link  https://www.jb51.net/article/150769.htm
+Pool 是用来缓存已经申请了的 目前未使用的 接下来可能会使用的 内存，以此缓解 GC 压力。使用它可以方便高效的构建线程安全的 free list（一种用于动态内存申请的数据结构）。然而，它并不适合所有场景的 free list。
+在同一 package 中独立运行的多个独立线程之间静默共享一组临时元素才是 pool 的合理使用场景。Pool 提供在多个独立 client 之间共享临时元素的机制。
+
+Pool 结构体的定义为：
+
+type Pool struct {
+  noCopy noCopy
+  local  unsafe.Pointer // 本地P缓存池指针
+  localSize uintptr  // 本地P缓存池大小
+  New func() interface{}  // 当池中没有可能对象时会调用 New 函数构造构造一个对象，注意，这个对象值生成函数产生的对象值永远不会被放置到池中。它会被直接返回给调用方。
+}
+
+
+Pool 中有两个定义的公共方法，分别是 Put - 向池中添加元素；Get - 从池中获取元素，如果没有，则调用 New 生成元素，如果 New 未设置，则返回 nil。
+(1)Get
+Pool 会为每个 P 维护一个本地池，P 的本地池分为 私有池 private 和共享池 shared。私有池中的元素只能本地 P 使用，共享池中的元素可能会被其他 P 偷走，所以使用私有池 private 时不用加锁，而使用共享池 shared 时需加锁。
+Get 会优先查找本地 private，再查找本地 shared，最后查找其他 P 的 shared，如果以上全部没有可用元素，最后会调用 New 函数获取新元素。
+  通过Get方法获取到的值是任意的。如果一个临时对象池的Put方法未被调用过，且它的New字段也未曾被赋予一个非nil的函数值，那么它的Get方法返回的结果值就一定会是nil。
+  Get方法返回的不一定就是存在于池中的值。不过，如果这个结果值是池中的，那么在该方法返回它之前就一定会把它从池中删除掉。
+(2)Put
+Put 优先把元素放在 private 池中；如果 private 不为空，则放在 shared 池中。有趣的是，在入池之前，该元素有 1/4 可能被丢掉
+
+(3)poolCleanup
+当世界暂停，垃圾回收将要开始时， poolCleanup 会被调用。该函数内不能分配内存且不能调用任何运行时函数。原因：
+防止错误的保留整个 Pool
+如果 GC 发生时，某个 goroutine 正在访问 l.shared，整个 Pool 将会保留，下次执行时将会有双倍内存
