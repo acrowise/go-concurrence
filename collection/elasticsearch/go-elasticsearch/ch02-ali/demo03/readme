@@ -1,0 +1,22 @@
+PUT /ali_index/_doc/1?pretty
+{
+  "title": "One",
+  "tags": ["ruby"],
+  "post_date":"2009-11-15T13:00:00"
+}
+
+
+PUT /ali_index/_doc/2?pretty
+{
+  "title": "Two",
+  "tags": ["ruby"],
+  "post_date":"2009-11-15T14:00:00"
+}
+
+
+PUT /ali_index/_doc/3?pretty
+{
+  "title": "Three",
+  "tags": ["ruby"],
+  "post_date":"2009-11-15T15:00:00"
+}
