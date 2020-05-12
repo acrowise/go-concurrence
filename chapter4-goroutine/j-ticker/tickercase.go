@@ -6,11 +6,14 @@ import (
 )
 
 func main() {
-
-
+	//创建一个通信用的通道
 	intChan := make(chan int, 1)
+	//创建一个断续器
 	ticker := time.NewTicker(time.Second)
 
+
+
+	//发送方
 	go func() {
 		for _ = range ticker.C {
 			select {
@@ -23,7 +26,7 @@ func main() {
 		fmt.Println("End. [sender]")
 	}()
 
-
+    //接收方
 	for e := range intChan {
 		fmt.Printf("Received: %v\n", e)
 	}
