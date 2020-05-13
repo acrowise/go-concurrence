@@ -15,8 +15,9 @@ var mapChan = make(chan map[string]*Counter, 1)
 func main() {
 	syncChan := make(chan struct{}, 2)
 
+	// 用于演示接收操作--------------------------------------
+	go func() {
 
-	go func() { // 用于演示接收操作。
 		for {
 			if elem, ok := <-mapChan; ok {
 				counter := elem["count"]
@@ -30,8 +31,8 @@ func main() {
 	}()
 
 
-	
-	go func() { // 用于演示发送操作。
+	// 用于演示发送操作----------------------------
+	go func() {
 	    //coutMap仅仅是个map零值
 		countMap := map[string]*Counter{
 			"count": &Counter{}, // &Counter{}也是int类型额
@@ -41,7 +42,7 @@ func main() {
 		for i := 0; i < 5; i++ {
 			mapChan <- countMap
 			time.Sleep(time.Millisecond)
-			fmt.Printf("The count map: %v. [sender]\n", countMap)
+			fmt.Printf("The count map: %v. [sender]\n", countMap["count"])
 		}
 		close(mapChan)
 		syncChan <- struct{}{}
