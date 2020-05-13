@@ -21,8 +21,8 @@ func main() {
 
 
 //strChan  chan  string  ===>双向通道
-//当<-在chan的右边就是 ====>发送通道      strChan  chan<-  string
-//当<-在chan的左边就是 ====>接收通道      strChan  <-chan  string
+//当<-在chan的右边，看起来像进入的样子，就是 ====>发送通道      strChan  chan<-  string
+//当<-在chan的左边就是，看起来像出去的样子 ====>接收通道      strChan  <-chan  string
 
 func receive(strChan <-chan string,syncChan1 <-chan struct{},syncChan2 chan<- struct{}) {
 
