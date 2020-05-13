@@ -4,29 +4,17 @@ import (
 	"fmt"
 	"time"
 )
-
 func main() {
 
 	fmt.Println(time.Now())
     pause:=10 * time.Second
-
-	//异步执行的
+	//创建一个每隔10s执行回调函数的一个定时器
 	timer:=time.AfterFunc(pause, func() {
-
-		fmt.Println("好苦啊")
 		fmt.Println(time.Now())
 	} )
-
-
-
-	fmt.Println("开始...")
+	//每隔12s重置定时器
 	for{
-		fmt.Println("等待...")
 		time.Sleep(12 * time.Second)
 		timer.Reset(pause)
 	}
-
-
-
-
 }
