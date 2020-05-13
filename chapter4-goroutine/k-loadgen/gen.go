@@ -8,9 +8,8 @@ import (
 	"math"
 	"sync/atomic"
 	"time"
-
-	"gopcp.v2/chapter4/loadgen/lib"
-	"gopcp.v2/helper/log"
+	"shanbumin/go-concurrence/chapter4-goroutine/k-loadgen/lib"
+	"shanbumin/go-concurrence/helper/log"
 )
 
 

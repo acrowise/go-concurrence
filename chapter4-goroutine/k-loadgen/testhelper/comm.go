@@ -9,7 +9,7 @@ import (
 	"net"
 	"time"
 
-	loadgenlib "gopcp.v2/chapter4/loadgen/lib"
+	loadgenlib "shanbumin/go-concurrence/chapter4-goroutine/k-loadgen/lib"
 )
 
 const (

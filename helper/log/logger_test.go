@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"gopcp.v2/helper/log/base"
+	"shanbumin/go-concurrence/helper/log/base"
 )
 
 func TestLogger(t *testing.T) {

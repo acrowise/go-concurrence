@@ -3,9 +3,8 @@ package loadgen
 import (
 	"testing"
 	"time"
-
-	loadgenlib "gopcp.v2/chapter4/loadgen/lib"
-	helper "gopcp.v2/chapter4/loadgen/testhelper"
+	loadgenlib "shanbumin/go-concurrence/chapter4-goroutine/k-loadgen/lib"
+	helper "shanbumin/go-concurrence/chapter4-goroutine/k-loadgen/testhelper"
 )
 
 

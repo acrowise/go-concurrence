@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"gopcp.v2/helper/log/base"
-	"gopcp.v2/helper/log/field"
+	"shanbumin/go-concurrence/helper/log/base"
+	"shanbumin/go-concurrence/helper/log/field"
 )
 
 func TestLogrusLogger(t *testing.T) {

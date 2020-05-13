@@ -6,8 +6,8 @@ import (
 	"os"
 	"sync"
 
-	"gopcp.v2/helper/log/base"
-	"gopcp.v2/helper/log/logrus"
+	"shanbumin/go-concurrence/helper/log/base"
+	"shanbumin/go-concurrence/helper/log/logrus"
 )
 
 // LoggerCreator 代表日志记录器的创建器。

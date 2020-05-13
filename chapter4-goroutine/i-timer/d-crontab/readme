@@ -20,7 +20,8 @@ for {
 }
 
 
-3、其中Tick定时任务，也可以先使用time.Ticker函数获取Ticker结构体，然后进行阻塞监听信息，这种方式可以手动选择停止定时任务，在停止任务时，减少对内存的浪费。
+3、其中Tick定时任务，也可以先使用time.Ticker函数获取Ticker结构体，然后进行阻塞监听信息，
+  这种方式可以手动选择停止定时任务，在停止任务时，减少对内存的浪费。
 
 t:=time.NewTicker(time.Second)
 for {

@@ -11,6 +11,8 @@ func main() {
 	d := time.Duration(time.Second*2)
 	t := time.NewTimer(d)
 	defer t.Stop()
+
+
 	for {
 		<- t.C
 		fmt.Println("timer超时...")
