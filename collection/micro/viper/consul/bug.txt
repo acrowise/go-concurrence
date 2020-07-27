@@ -1,9 +1,0 @@
-如果你启用了go mod，在从etcd或者consul等读取配置的时候可能会遇到这个错误:
-
-panic: codecgen version mismatch: current: 8, need 10. Re-generate file:
-/Users/lyre/go/pkg/mod/github.com/coreos/etcd@v3.3.10+incompatible/client/keys.generated.go
-
-解决办法是：
-go get github.com/ugorji/go@v1.1.1
-go get github.com/ugorji/go/codec@none
-

@@ -1,9 +1,0 @@
-我们可以直接使用http包来存取es，但是我们建议使用专门封装的包，不要自己写原生的，很累的，我们使用下面的包吧
-https://github.com/elastic/go-elasticsearch  [官方包][推荐]
-https://github.com/olivere/elastic  [比较好用的第三方包]
-
-
-
-安装包:
-在go.mod中加入如下，回车之后会自动添加后缀,然后就直接使用吧，编译的时候会自动安装的
-require github.com/elastic/go-elasticsearch/v7 7.x
